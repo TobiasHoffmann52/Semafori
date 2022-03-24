@@ -20,15 +20,13 @@ void setup() {
     listeLys[i-1]         = t;                                // og indsætter t i vores trafiklys-array
   }
 
-  //Dette er udelukkende et test,- der tester om trafiklysene skifter fra rødt til grønt
-  for (int tid=0; tid<10; tid++) {
-    println("Alle trafiklys:");
-    for (int j=0; j<listeLys.length; j++) {
-      TrafikLys trafiklys = listeLys[j]; 
-      println(" objekt ", trafiklys.D, trafiklys.R, trafiklys.G, "tiden = " +trafiklys.tid, "redOn= " + trafiklys.redOn);
-      trafiklys.update();   //hver gang tiden går kalder vi update på hver eneste trafiklys
-      //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
+  Bil bil = new Bil();
+
+  while (bil.position < L) {
+    for (TrafikLys tf : listeLys) {
+      tf.update();
     }
+    bil.update(listeLys);
   }
 }
 
@@ -47,14 +45,11 @@ class Bil {
         break;
       }
     }
-    
-    if(kor){
+
+    if (kor) {
       position++;
     }
-    
   }
-  
-  
 }
 
 
