@@ -25,34 +25,33 @@ void setup() {
     println("Alle trafiklys:");
     for (int j=0; j<listeLys.length; j++) {
       TrafikLys t = listeLys[j]; 
-      t.update();   //hver gang tiden går kalder vi update på hver eneste trafiklys
-                    //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
       println(" objekt ", t.D, t.R, t.G, "tiden = " +t.tid, "redOn= " + t.redOn);
+      t.update();   //hver gang tiden går kalder vi update på hver eneste trafiklys
+      //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
     }
   }
 }
 
 //Dette er Trafiklysklassen
-class TrafikLys{
-  
+class TrafikLys {
+
   int D, R, G;
   boolean redOn = true;
   int tid = 0;
-  
-  TrafikLys(int d, int r, int g){
-    D = d; R = r; G = g;
+
+  TrafikLys(int d, int r, int g) {
+    D = d; 
+    R = r; 
+    G = g;
   }
-  
+
   //hver gang der går et sekund(tidsenhed) skal man kalde denne update-metode
   //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
   //men indtil nu skifter lyset kun en gang!
-  void update(){
+  void update() {
     tid++;
-    if(tid > R ) {
+    if (tid >= R ) {
       redOn = false;
     }
-
   }
-  
-  
 }
