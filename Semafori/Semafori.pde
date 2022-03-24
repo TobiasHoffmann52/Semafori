@@ -21,16 +21,42 @@ void setup() {
   }
 
   //Dette er udelukkende et test,- der tester om trafiklysene skifter fra rødt til grønt
-  for (int i=0; i<10; i++) {
+  for (int tid=0; tid<10; tid++) {
     println("Alle trafiklys:");
     for (int j=0; j<listeLys.length; j++) {
-      TrafikLys t = listeLys[j]; 
-      println(" objekt ", t.D, t.R, t.G, "tiden = " +t.tid, "redOn= " + t.redOn);
-      t.update();   //hver gang tiden går kalder vi update på hver eneste trafiklys
+      TrafikLys trafiklys = listeLys[j]; 
+      println(" objekt ", trafiklys.D, trafiklys.R, trafiklys.G, "tiden = " +trafiklys.tid, "redOn= " + trafiklys.redOn);
+      trafiklys.update();   //hver gang tiden går kalder vi update på hver eneste trafiklys
       //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
     }
   }
 }
+
+
+class Bil {
+  int position = 0;
+  int tid = 0;
+
+  void update(TrafikLys[] listAfLys) {
+
+    boolean kor = true;
+
+    for (int i = 0; i < listAfLys.length; i++) {
+      if (position == listAfLys[i].D && listAfLys[i].redOn) {
+        kor = false;
+        break;
+      }
+    }
+    
+    if(kor){
+      position++;
+    }
+    
+  }
+  
+  
+}
+
 
 //Dette er Trafiklysklassen
 class TrafikLys {
