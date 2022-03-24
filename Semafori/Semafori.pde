@@ -37,7 +37,7 @@ class TrafikLys {
 
   int D, R, G;
   boolean redOn = true;
-  int tid = 0;
+  int tid = 1;
 
   TrafikLys(int d, int r, int g) {
     D = d; 
@@ -45,13 +45,16 @@ class TrafikLys {
     G = g;
   }
 
-  //hver gang der går et sekund(tidsenhed) skal man kalde denne update-metode
-  //update metoden har ansvaret for at lyset skifter fra rødt til grønt til rødt osv. på de rigtige tidspunkter
-  //men indtil nu skifter lyset kun en gang!
   void update() {
     tid++;
-    if (tid >= R ) {
+    if (tid <= R ) {
+      redOn = true;
+    }
+    if (tid > R && tid <= R + G) {
       redOn = false;
+    }
+    if (tid == R + G) {
+      tid = 0;
     }
   }
 }
