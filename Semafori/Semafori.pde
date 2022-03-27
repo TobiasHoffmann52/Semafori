@@ -19,37 +19,11 @@ void setup() {
     TrafikLys t           = new TrafikLys(D1, R1, G1);        // Vi opretter herefter et trafiklys-objekt, der gemmes i variablen t
     listeLys[i-1]         = t;                                // og indsætter t i vores trafiklys-array
   }
-
-  Bil bil = new Bil();
-
-  while (bil.position < L) {
-    for (TrafikLys tf : listeLys) {
-      tf.update();
-    }
-    bil.update(listeLys);
-  }
 }
 
 
 class Bil {
-  int position = 0;
-  int tid = 0;
-
-  void update(TrafikLys[] listAfLys) {
-
-    boolean kor = true;
-
-    for (int i = 0; i < listAfLys.length; i++) {
-      if (position == listAfLys[i].D && listAfLys[i].redOn) {
-        kor = false;
-        break;
-      }
-    }
-
-    if (kor) {
-      position++;
-    }
-  }
+  
 }
 
 
