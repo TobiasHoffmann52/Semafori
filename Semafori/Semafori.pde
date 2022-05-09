@@ -1,12 +1,19 @@
+int L, N;
+Bil bil;
+TrafikLys[]  listeLys;
+
 void setup() {
+  frameRate(1);
+  size(500,500);
+  
   String[] inputFraFil = loadStrings("input.txt"); 
 
-  String linje1        = inputFraFil[0];
-  String[] talLinje1   = linje1.split(" ");
-  int L                = Integer.parseInt(talLinje1[1]);  // vi henter længden af vejen, som er angivet på plads 2 i input-filen
-  int N                = Integer.parseInt(talLinje1[0]);  // vi henter antallet af trafiklys, som angivet på plads 1 i input-filen
+  String[] talLinje1   = (inputFraFil[0]).split(" ");
+  L                = Integer.parseInt(talLinje1[1]);  // vi henter længden af vejen, som er angivet på plads 2 i input-filen
+  N                = Integer.parseInt(talLinje1[0]);  // vi henter antallet af trafiklys, som angivet på plads 1 i input-filen
 
-  TrafikLys[] listeLys = new TrafikLys[N];                // vi laver et array af trafiklys! Her skal alle trafiklysene indsættes i
+  listeLys = new TrafikLys[N];                // vi laver et array af trafiklys! Her skal alle trafiklysene indsættes i
+  bil      = new Bil();                       //vi laver en bil!
 
   for (int i=1; i<inputFraFil.length; i++  ) {                  
     // her et loop hvor vi henter alle linjer fra linje 2 og frem
@@ -21,35 +28,18 @@ void setup() {
   }
 }
 
+void draw() {
+  //Vi opdaterer alle trafiklys
+  for (TrafikLys tf : listeLys) {
+    tf.update();
+  }
+  //Vi opdaterer bilens position
+  bil.update(listeLys);
 
-class Bil {
+  if (bil.position > L) { 
+    noLoop();
+  } else{
+    println(bil.tid, bil.position);
+  }
   
-}
-
-
-//Dette er Trafiklysklassen
-class TrafikLys {
-
-  int D, R, G;
-  boolean redOn = true;
-  int tid = 1;
-
-  TrafikLys(int d, int r, int g) {
-    D = d; 
-    R = r; 
-    G = g;
-  }
-
-  void update() {
-    tid++;
-    if (tid <= R ) {
-      redOn = true;
-    }
-    if (tid > R && tid <= R + G) {
-      redOn = false;
-    }
-    if (tid == R + G) {
-      tid = 0;
-    }
-  }
 }
