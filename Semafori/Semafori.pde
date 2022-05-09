@@ -1,10 +1,11 @@
 int L, N;
 Bil bil;
 TrafikLys[]  listeLys;
-
 void setup() {
   frameRate(1);
   size(500,500);
+  
+  ellipseMode(CENTER);
   
   String[] inputFraFil = loadStrings("input.txt"); 
 
@@ -29,6 +30,7 @@ void setup() {
 }
 
 void draw() {
+  clear();
   //Vi opdaterer alle trafiklys
   for (TrafikLys tf : listeLys) {
     tf.update();
@@ -41,5 +43,34 @@ void draw() {
   } else{
     println(bil.tid, bil.position);
   }
+  fill(255);
+  rect(bil.position*10,250,30,20);
   
+  if(listeLys[0].redOn == true){
+    fill(255,0,0);
+  } else {
+  fill(0,255,0);
+  }
+  circle(50,100,50);
+  
+  if(listeLys[1].redOn == true){
+    fill(255,0,0);
+  } else {
+  fill(0,255,0);
+  }
+  circle(120,100,50);
+  
+  if(listeLys[2].redOn == true){
+    fill(255,0,0);
+  } else {
+  fill(0,255,0);
+  }
+  circle(190,100,50);
+  
+  if(listeLys[3].redOn == true){
+    fill(255,0,0);
+  } else {
+  fill(0,255,0);
+  }
+  circle(260,100,50);
 }

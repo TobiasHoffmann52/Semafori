@@ -20,4 +20,5 @@ class TrafikLys{
     }
     tid++;
   }
+  
 }
